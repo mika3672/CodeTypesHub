@@ -1,6 +1,6 @@
-# CodeTypesHub ( Dépôt de Conseils sur le Web Scraping )
+# CodeTypesHub ( Dépôt de Conseils )
 
-Bienvenue dans le dépôt **Web Scraping Tips** ! Ce dépôt vise à fournir une collection complète de techniques, bonnes pratiques et conseils spécifiques aux plateformes de sites e-commerce pour le web scraping en utilisant des technologies comme **JavaScript**, **XHR**, **sélecteurs CSS** et **XPath**.
+Bienvenue dans le dépôt **Web Scrapo Tips** ! Ce dépôt vise à fournir une collection complète de techniques, bonnes pratiques et conseils spécifiques aux plateformes de sites e-commerce pour le web scraping en utilisant des technologies comme **JavaScript**, **XHR**, **sélecteurs CSS** et **XPath**.
 
 ## 🚀 Fonctionnalités
 - **Techniques Générales** : Concepts de base et méthodes pour un web scraping efficace.
