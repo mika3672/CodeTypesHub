@@ -1,4 +1,3 @@
-
 class Product {
   constructor(
     sku,
@@ -29,12 +28,12 @@ class Product {
 
   static sendXHRRequest(url) {
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", url, false);
+    xhr.open('GET', url, false);
     xhr.send();
     return JSON.parse(xhr.response);
   }
 
-  static parseDOM(text, type = "text/html") {
+  static parseDOM(text, type = 'text/html') {
     let parser = new DOMParser();
     return parser.parseFromString(text, type);
   }
@@ -51,7 +50,7 @@ class Product {
   }
 
   static getPictures(resp) {
-    let color = decodeURIComponent(location.hash.substring(1)).replace("_", "");
+    let color = decodeURIComponent(location.hash.substring(1)).replace('_', '');
     let { variants, media: medias } = resp;
     let featuredImageAlts = variants?.map((el) => el?.featured_image?.alt);
     let pictures = medias
@@ -101,7 +100,7 @@ class Product {
 
   static addOrReplaceVariant(url, variantValue) {
     let urlObj = new URL(url);
-    urlObj.searchParams.set("variant", variantValue);
+    urlObj.searchParams.set('variant', variantValue);
     return urlObj.toString();
   }
 }
@@ -115,34 +114,32 @@ let getCurrency = hiddenInputsObj?.currency_code || Shopify.currency.active;
 window.prodCurrency = getCurrency;
 
 if (getLoc && getCurrency) {
-  let resp = Product.sendXHRRequest(getLoc + ".js");
+  let resp = Product.sendXHRRequest(getLoc + '.js');
   let descriptionHtml = Product.parseDOM(
     `<html><body>${resp.description}<body></html>`
   );
 
+  let optionKeywords = [
+    'couleur',
+    'color',
+    'titre',
+    'title',
+    'titolo',
+    'model',
+    'modèle',
+  ];
+
   let options = resp.options.filter(
     (el) =>
-      !el.name.toLowerCase().includes("couleur") &&
-      !el.name.toLowerCase().includes("color") &&
-      !el.name.toLowerCase().includes("titre") &&
-      !el.name.toLowerCase().includes("title") &&
-      !el.name.toLowerCase().includes("titolo") &&
-      !el.name.toLowerCase().includes("model") &&
-      !el.name.toLowerCase().includes("modèle")
+      !optionKeywords.some((keyword) => el.name.toLowerCase().includes(keyword))
   );
-  let colorList = resp.options.filter(
-    (el) =>
-      el.name.toLowerCase().includes("couleur") ||
-      el.name.toLowerCase().includes("color") ||
-      el.name.toLowerCase().includes("titre") ||
-      el.name.toLowerCase().includes("title") ||
-      el.name.toLowerCase().includes("titolo") ||
-      el.name.toLowerCase().includes("model") ||
-      el.name.toLowerCase().includes("modèle")
+
+  let colorList = resp.options.filter((el) =>
+    optionKeywords.some((keyword) => el.name.toLowerCase().includes(keyword))
   );
 
   let colorCombination = Product.getCombinations(colorList).map((el) =>
-    encodeURI(el.join(" / "))
+    encodeURI(el.join(' / '))
   );
   let colorLinks = colorCombination.map((el) => `${currentUrl}#${el}`);
   window.prodColorLinks = colorLinks;
@@ -160,26 +157,26 @@ if (getLoc && getCurrency) {
   combinations.forEach((combination) => {
     window.prodVariant.forEach((variant) => {
       if (Product.compareArrays(variant.options, combination)) {
-        variant["color"] = combination.join(" / ");
-        variant["colorOptions"] = combination;
+        variant['color'] = combination.join(' / ');
+        variant['colorOptions'] = combination;
 
         let getLoc = new URL(location.href);
         let url = `${getLoc.origin}${getLoc.pathname}?variant=${
           variant.id
         }#${encodeURI(variant.color)}`;
-        variant["color_url"] = url;
+        variant['color_url'] = url;
         prod.push(variant);
       }
     });
   });
 
   let currentColor = decodeURI(location.hash.slice(1));
-  let color = currentColor || combinations[0].join(" / ");
+  let color = currentColor || combinations[0].join(' / ');
 
   let variantsColor = prod.filter((el) =>
     Product.compareArrays(
       el.options,
-      color.split(" / ").map((e) => e.trim())
+      color.split(' / ').map((e) => e.trim())
     )
   );
   window.prodVariantsColor = variantsColor;
