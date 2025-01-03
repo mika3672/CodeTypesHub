@@ -1,0 +1,34 @@
+name: Notify Slack on PR Merge to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify-slack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Get the latest commit message
+      - name: Get latest commit message
+        id: get-commit-message
+        run: |
+          echo "commit_message=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+
+
+      - name: Notify Slack
+        env:
+          SLACK_NOTIFY_URL: https://slack-notify.onrender.com
+          COMMIT_MESSAGE: ${{ env.commit_message }}
+        run: |
+          curl -X POST "$SLACK_NOTIFY_URL/notify" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "channel": "#smartone_dev_comm",
+            "username": "Veepee Dev",
+            "commitMessage": "'"$COMMIT_MESSAGE"'"
+          }'
