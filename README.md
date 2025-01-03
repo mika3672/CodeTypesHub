@@ -38,32 +38,6 @@ Bienvenue dans le dépôt **Web Scrapo Tips** ! Ce dépôt vise à fournir une c
 - Implémenter une limitation du taux de requêtes ( XHR ) pour éviter la détection.
 - Imiter le comportement humain pour masquer l'activité des bots.
 
-### 4. Exemples de Code
-Explorez notre bibliothèque de scripts pour :
-- Scraper des sites statiques et dynamiques.
-- Gérer l'authentification et les cookies de session.
-
----
-
-## 📜 Contribuer
-Les contributions sont les bienvenues ! Si vous avez des conseils, des extraits de code ou des idées, suivez ces étapes :
-
-1. Forkez le dépôt.
-2. Créez une nouvelle branche pour votre fonctionnalité.
-3. Ajoutez vos modifications et soumettez une pull request.
-
-Assurez-vous que vos contributions respectent le **code de conduite** du dépôt et que tous les exemples incluent des commentaires appropriés.
-
----
-
-
-## 🛠 Outils & Technologies
-- **Langages** : JavaScript
-- **Technologies** : XHR, sélecteurs CSS, XPath
-- **Plateformes** : Shopify, Prestashop, Magento, WooCommerce, BigCommerce, Wix, Squarespace, ...
-
----
-
 #### Standards pour les Outils
 
 **Noms des fonctions :**
@@ -172,6 +146,31 @@ Assurez-vous que vos contributions respectent le **code de conduite** du dépôt
 }
 ```
 
+### 4. Exemples de Code
+Explorez notre bibliothèque de scripts pour :
+- Scraper des sites statiques et dynamiques.
+- Gérer l'authentification et les cookies de session.
+
+---
+
+## 📜 Contribuer
+Les contributions sont les bienvenues ! Si vous avez des conseils, des extraits de code ou des idées, suivez ces étapes :
+
+1. Forkez le dépôt.
+2. Créez une nouvelle branche pour votre fonctionnalité.
+3. Ajoutez vos modifications et soumettez une pull request.
+
+Assurez-vous que vos contributions respectent le **code de conduite** du dépôt et que tous les exemples incluent des commentaires appropriés.
+
+---
+
+
+## 🛠 Outils & Technologies
+- **Langages** : JavaScript
+- **Technologies** : XHR, sélecteurs CSS, XPath
+- **Plateformes** : Shopify, Prestashop, Magento, WooCommerce, BigCommerce, Wix, Squarespace, ...
+
+---
 
 ## 📧 Contact
 Pour toute question ou retour, ouvrez une issue.
