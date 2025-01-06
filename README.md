@@ -130,6 +130,8 @@ Bienvenue dans le dépôt **Web Scrapo Tips** ! Ce dépôt vise à fournir une c
 
 #### Configuration Prettier (.prettierrc)
 
+La configuration de Prettier permet d’assurer que le code est formaté de manière cohérente et propre. Vous pouvez consulter la configuration complète de Prettier dans le fichier [docs/PRETTIER.md](docs/PRETTIER.md).
+
 ```json
 {
   "semi": true,
