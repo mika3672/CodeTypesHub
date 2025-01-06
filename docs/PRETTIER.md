@@ -42,7 +42,7 @@ Le fichier `.prettierrc` contient les règles de formatage.
    ```
    dist/
    build/
-   ``
+   ```
 
 ---
 
@@ -66,7 +66,7 @@ Le fichier `.prettierrc` contient les règles de formatage.
 
 ---
 
-## **4. Utiliser les commandes de Prettier**
+## **3. Utiliser les commandes de Prettier**
 
 ### Dans VS Code :
 
@@ -76,7 +76,7 @@ Le fichier `.prettierrc` contient les règles de formatage.
 
 ---
 
-## **5. Déboguer Prettier dans VS Code**
+## **4. Déboguer Prettier dans VS Code**
 
 Si Prettier ne fonctionne pas comme prévu, ouvrez la console de sortie de VS Code et sélectionnez **"Prettier"** pour voir les journaux.
 
