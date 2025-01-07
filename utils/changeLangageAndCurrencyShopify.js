@@ -21,7 +21,7 @@ formData.append('country_code', 'FR');
 xhr.send(formData);
 
 // Injecter les données dans une variable
-function get_resp(link) {
+function getResponse(link) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', link, false);
     xhr.send();
@@ -32,4 +32,4 @@ function get_resp(link) {
 let loc = location.href.split('?')[0];
 
 // Injecter les variants dans une variable resp
-window.resp = get_resp(loc + '.js');
+window.resp = getResponse(loc + '.js');
