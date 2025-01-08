@@ -1,5 +1,6 @@
 /**
  * Removes HTML tags from a string.
+ * To test on a product page of a website
  * @param {string} htmlString - The string containing HTML tags.
  * @returns {string} - The plain text content without any HTML tags.
  */
