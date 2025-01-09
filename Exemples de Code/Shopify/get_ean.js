@@ -3,11 +3,11 @@
 
     let { barcode: code, label: label } = window.productInfo || {};
     let currentColor = decodeURIComponent(location.hash.slice(1)).replace(
-        '_',
-        ''
+        `_`,
+        ``
     );
 
-    let options = label.map((el) => currentColor.split(' / ').concat(el));
+    let options = label.map((el) => currentColor.split(` / `).concat(el));
 
     window.prodVariantsColor.forEach((variant, index) => {
         let array1 = variant.options;
@@ -31,6 +31,6 @@
     )
         barcode = window.prodVariantsColor.map((el) => el.barcode);
 
-    barcode = barcode.map((el) => el || '');
-    return barcode.join('<!LIST!>');
-})('DATA_ATTRIBUTE_INSTANCE_LIVE_SCRAPPER_SPOT');
+    barcode = barcode.map((el) => el || ``);
+    return barcode.join(`<!LIST!>`);
+})(`DATA_ATTRIBUTE_INSTANCE_LIVE_SCRAPPER_SPOT`);

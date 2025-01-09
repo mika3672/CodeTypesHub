@@ -2,7 +2,7 @@ function getAttributes() {
     let attrs = [];
     let selectors = document.querySelectorAll(`[class*="-information"] select[name*='group'] option`);
     selectors.forEach(el => {
-        let name = el?.parentElement.getAttribute('name'); 
+        let name = el?.parentElement.getAttribute(`name`); 
         attrs.push(name);   
     });
     attrs = Array.from(new Set(attrs));
@@ -17,15 +17,15 @@ function getGroup() {
     variants.forEach(variant => {
         let selector = document.querySelectorAll(`[name="${variant}"]`);
         selector.forEach(element => {
-            if (element.tagName.toLowerCase() === 'select') {
+            if (element.tagName.toLowerCase() === `select`) {
                 let selectValues = Array.from(element.options).map(option => option.value);
-                allValues.push({ type: 'select', values: selectValues, group: variant });
-            } else if (element.tagName.toLowerCase() === 'input') {
-                let existingGroup = allValues.find(item => item.group === variant && item.type === 'input');
+                allValues.push({ type: `select`, values: selectValues, group: variant });
+            } else if (element.tagName.toLowerCase() === `input`) {
+                let existingGroup = allValues.find(item => item.group === variant && item.type === `input`);
                 if (existingGroup) {
                     existingGroup.values.push(element.value);
                 } else {
-                    allValues.push({ type: 'input', values: [element.value], group: variant });
+                    allValues.push({ type: `input`, values: [element.value], group: variant });
                 }
             }
         });
@@ -36,26 +36,24 @@ function getGroup() {
 
 function sendXHRRequest(url, body) {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', url, false);
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.open(`POST`, url, false);
+    xhr.setRequestHeader(`Accept`, `application/json`);
+    xhr.setRequestHeader(`Content-Type`, `application/x-www-form-urlencoded`);
     xhr.send(body);
     return xhr.responseText;
 }
 
 function cartesianProduct(arrays) {
-    return arrays.reduce((acc, curr) => {
-        return acc.flatMap(a => curr.map(b => [...a, b]));
-    }, [[]]);
+    return arrays.reduce((acc, curr) => acc.flatMap(a => curr.map(b => [...a, b])), [[]]);
 }
 
-function parseDOM(text, type = 'text/html') {
+function parseDOM(text, type = `text/html`) {
     let parser = new DOMParser();
     return parser.parseFromString(text, type);
 }
 
 function getHiddenInputsObject() {
-    let hiddenInputs = document.querySelectorAll('[class*="-information"] form input[name][type="hidden"]');
+    let hiddenInputs = document.querySelectorAll(`[class*="-information"] form input[name][type="hidden"]`);
     let inputsObject = {};
     hiddenInputs.forEach(input => {
         inputsObject[input.name] = input.value;
@@ -82,7 +80,7 @@ function getProducts(allValues) {
 
         let paramForms = new URLSearchParams({
             ajax: 1,
-            action: 'refresh',
+            action: `refresh`,
             quantity_wanted: 1
         });
 
@@ -91,7 +89,7 @@ function getProducts(allValues) {
         });
 
         let body = params.toString();
-        let uri = url + '?controller=product&token=' + hiddenInputsObj.token + "&" + body;
+        let uri = url + `?controller=product&token=` + hiddenInputsObj.token + `&` + body;
         let response = JSON.parse(sendXHRRequest(uri, paramForms.toString()));
         products.push(response);
     });
@@ -117,11 +115,11 @@ function getPriceNet(products) {
         let productPrice = product?.product_prices;
         productPriceElement = parseDOM(productPrice);
         productPriceElement = productPriceElement?.querySelector(`[class*="urrent-pric"] [itemprop="price"]`);
-        productPrice = productPriceElement?.getAttribute('content');
+        productPrice = productPriceElement?.getAttribute(`content`);
         priceNet.push(productPrice);
     });
 
-   return priceNet;
+    return priceNet;
 }
 
 function getPriceGross(products) {
@@ -130,12 +128,12 @@ function getPriceGross(products) {
         let productPrice = product?.product_prices;
         productPriceElement = parseDOM(productPrice);
         productPriceElement = productPriceElement?.querySelector(`[class*="roduct-discount"] [class*="regular-price"]`);
-        priceText = productPriceElement?.textContent.replace(/[\.,]/g, m => (m === '.' ? '' : '.'));
+        priceText = productPriceElement?.textContent.replace(/[\.,]/g, m => (m === `.` ? `` : `.`));
         let priceBrut = parseFloat(priceText) || 0;
         priceGross.push(priceBrut);
     });
 
-   return priceGross;
+    return priceGross;
 }
 
 function getPriceCurrency(products) {
@@ -144,17 +142,17 @@ function getPriceCurrency(products) {
         let productPrice = product?.product_prices;
         productPriceElement = parseDOM(productPrice);
         productPriceElement = productPriceElement?.querySelector(`[class*="-prices"] [itemprop="priceCurrency"]`);
-        productPrice = productPriceElement?.getAttribute('content');
+        productPrice = productPriceElement?.getAttribute(`content`);
         priceCurrency.push(productPrice);
     });
 
-   return priceCurrency;
+    return priceCurrency;
 }
 
 function getAvailability(products) {
     function isAvailable(element) {
         let selector = element.querySelector(`.add button[class*="to-cart"]`);
-        let isAvailable = selector && !selector?.hasAttribute('disabled') ? true : false;
+        let isAvailable = selector && !selector?.hasAttribute(`disabled`) ? true : false;
         return isAvailable;
     }
 
@@ -166,13 +164,13 @@ function getAvailability(products) {
         sizeAvailability.push(productAvailable);
     });
 
-   return sizeAvailability;
+    return sizeAvailability;
 }
 
 
 function getSizeLabels(products) {
     function getSize(doc) {
-        let sizes = '';
+        let sizes = ``;
         let xpath =  `//*[contains(@class,'variant')]//select//option[@selected] | //*[contains(@class,'ontenance')]`;
         let sizeSelector = document.evaluate(
             xpath,
@@ -188,7 +186,7 @@ function getSizeLabels(products) {
             let selector = document.querySelector(`[class*="product-information"] [class*="ontenance"]`);
             sizes = selector?.textContent;
         }
-        sizes = sizes && sizes.length ? sizes : 'TU';
+        sizes = sizes && sizes.length ? sizes : `TU`;
         return sizes;
     }
 
@@ -200,7 +198,7 @@ function getSizeLabels(products) {
         sizeLabels.push(size);
     });
 
-   return sizeLabels;
+    return sizeLabels;
 }
 
 

@@ -6,13 +6,13 @@
         el.textContent.trim().toLowerCase()
     );
     let hash = decodeURIComponent(location.hash.slice(1))
-        .replace('_', '')
-        .split('/')
+        .replace(`_`, ``)
+        .split(`/`)
         .map((el) => el.trim().toLowerCase());
     let selector = document.querySelector(
-        'div.ProductForm__Variants span.ProductForm__SelectedValue.Text--subdued'
+        `div.ProductForm__Variants span.ProductForm__SelectedValue.Text--subdued`
     );
     let color =
-        hash.find((h) => colors.includes(h)) || selector?.textContent || '';
-    return color || hash.join(' / ');
-})('DATA_ATTRIBUTE_INSTANCE_LIVE_SCRAPPER_SPOT');
+        hash.find((h) => colors.includes(h)) || selector?.textContent || ``;
+    return color || hash.join(` / `);
+})(`DATA_ATTRIBUTE_INSTANCE_LIVE_SCRAPPER_SPOT`);

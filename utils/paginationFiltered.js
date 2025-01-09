@@ -11,13 +11,13 @@
 function fetchProductLinksSync() {
     let pageNum = 1;
 
-    let baseUrl = window.location.href.split('?')[0]; // Enlever les paramètres de requête
+    let baseUrl = window.location.href.split(`?`)[0]; // Enlever les paramètres de requête
 
     let productsSelector =
-        'div[class*="products"] [class*="product"][class*="item"] > a[class*="link"]';
-    let paginationType = '?p=';
+        `div[class*="products"] [class*="product"][class*="item"] > a[class*="link"]`;
+    let paginationType = `?p=`;
 
-    let includeWords = ['maglia', 'grembiule', 'calzini']; // Mots à inclure
+    let includeWords = [`maglia`, `grembiule`, `calzini`]; // Mots à inclure
     let excludeWords = []; // Mots à exclure
 
     let allFilteredLinks = []; // Tableau pour stocker les liens filtrés
@@ -39,12 +39,12 @@ function fetchProductLinksSync() {
     function fetchPage(pageNum) {
         let url = `${baseUrl}${paginationType}${pageNum}`;
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', url, false);
+        xhr.open(`GET`, url, false);
 
         xhr.onload = function () {
             if (xhr.status === 200) {
                 let parser = new DOMParser();
-                let doc = parser.parseFromString(xhr.responseText, 'text/html');
+                let doc = parser.parseFromString(xhr.responseText, `text/html`);
                 let productLinks = doc.querySelectorAll(productsSelector);
 
                 // Filtrer les liens
@@ -60,12 +60,12 @@ function fetchProductLinksSync() {
                     pageNum++;
                     fetchPage(pageNum); // Récursion pour la page suivante
                 } else {
-                    console.log('Pagination terminée.');
-                    console.log('Tous les liens filtrés:', allFilteredLinks);
+                    console.log(`Pagination terminée.`);
+                    console.log(`Tous les liens filtrés:`, allFilteredLinks);
                 }
             } else {
                 console.error(
-                    'Erreur lors du chargement de la page:',
+                    `Erreur lors du chargement de la page:`,
                     xhr.status
                 );
             }

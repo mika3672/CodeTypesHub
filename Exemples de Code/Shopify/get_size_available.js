@@ -5,13 +5,13 @@
 
     // Get the current color from the URL hash
     let currentColor = decodeURIComponent(location.hash.slice(1)).replace(
-        '_',
-        ''
+        `_`,
+        ``
     );
 
     // Generate an array of options by combining the current color with labels
     let options = label.map((labelItem) =>
-        currentColor.split(' / ').concat(labelItem)
+        currentColor.split(` / `).concat(labelItem)
     );
 
     // Iterate through product variants to determine their availability
@@ -56,5 +56,5 @@
     }
 
     // Return the availability
-    return availabilityList.join('<!LIST!>');
-})('DATA_ATTRIBUTE_INSTANCE_LIVE_SCRAPPER_SPOT');
+    return availabilityList.join(`<!LIST!>`);
+})(`DATA_ATTRIBUTE_INSTANCE_LIVE_SCRAPPER_SPOT`);
