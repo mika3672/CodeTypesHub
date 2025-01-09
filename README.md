@@ -2,6 +2,12 @@
 
 Bienvenue dans le dépôt **Web Scrapo Tips** ! Ce dépôt vise à fournir une collection complète de techniques, bonnes pratiques et conseils spécifiques aux plateformes de sites e-commerce pour le web scraping en utilisant des technologies comme **JavaScript**, **XHR**, **sélecteurs CSS** et **XPath**.
 
+## 📊 Tableau de Bord des Commits
+
+![Commit Percentage Dashboard](https://github.com/Onjatiana-valisoa/CodeTypesHub/blob/commit-dashboard/output/commit_percentage.svg)
+
+---
+
 ## 🚀 Fonctionnalités
 - **Techniques Générales** : Concepts de base et méthodes pour un web scraping efficace.
 - **Guides Spécifiques aux Plateformes** : Aperçus détaillés pour des plateformes e-commerce populaires comme Shopify, Prestashop, Magento, WooCommerce, BigCommerce, Wix, Squarespace, et bien plus.
