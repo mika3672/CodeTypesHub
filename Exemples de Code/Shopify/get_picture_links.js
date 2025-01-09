@@ -1,6 +1,5 @@
 (function (data_attribute_stringified) {
-    let selector1 =
-        `[class*="allery"] [class*="thumbnail"] a[href][class*="visible"]`;
+    let selector1 = `[class*="allery"] [class*="thumbnail"] a[href][class*="visible"]`;
     let elements1 = document.querySelectorAll(selector1);
     let imageUrls;
 

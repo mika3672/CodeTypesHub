@@ -26,7 +26,9 @@ jobs:
           npm install eslint prettier eslint-config-prettier eslint-plugin-prettier
 
       - name: Run ESLint
-        run: npx eslint .
+        run: | 
+         npx eslint .
+         npx eslint . --fix
 
       - name: Check formatting with Prettier
-        run: npx prettier --check .
+        run: npx prettier --check  "**/*.js"

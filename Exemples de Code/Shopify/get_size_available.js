@@ -19,7 +19,7 @@
         let variantOptions = variant.options;
         let comparisonOptions = options.length ? options : [[currentColor]];
 
-        // Function to compare two arrays for equality 
+        // Function to compare two arrays for equality
         let areArraysEqual = function (array1, array2) {
             return array1.sort().toString() === array2.sort().toString();
         };

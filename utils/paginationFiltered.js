@@ -13,8 +13,7 @@ function fetchProductLinksSync() {
 
     let baseUrl = window.location.href.split(`?`)[0]; // Enlever les paramètres de requête
 
-    let productsSelector =
-        `div[class*="products"] [class*="product"][class*="item"] > a[class*="link"]`;
+    let productsSelector = `div[class*="products"] [class*="product"][class*="item"] > a[class*="link"]`;
     let paginationType = `?p=`;
 
     let includeWords = [`maglia`, `grembiule`, `calzini`]; // Mots à inclure
