@@ -7,6 +7,10 @@ git remote set-url upstream https://github.com/Onjatiana-valisoa/CodeTypesHub
 ```
 
 •4. Effectuer et valider les modifications.
+```bash
+git add .
+git commit -m "docs: add contributors file"
+```
 •6. Synchroniser avec le dépôt principal.
 •7. Pousser les modifications vers le fork.
 •8. Soumettre une Pull Request.
