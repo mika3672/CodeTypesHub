@@ -5,7 +5,7 @@
  * Declarer le selecteur de categorie , faire une parcour sur chaque elements
  * Créer un événement mouseover pour simuler un hover
  * Déclenche le survol sur l'élément , puis pusher les liens Categories
- * Exemple de marque : Tommy Hilfiger/ Descamps
+ * Exemple de marque : Tommy Hilfiger/ Descamps 
  */
 
 (function (data_attribute_stringified) {
