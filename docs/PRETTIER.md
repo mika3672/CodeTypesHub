@@ -12,37 +12,39 @@ Le fichier `.prettierrc` contient les règles de formatage.
 
 ```json
 {
-  "semi": true,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "tabWidth": 4,
-  "useTabs": false,
-  "bracketSpacing": true,
-  "arrowParens": "always",
-  "printWidth": 80,
-  "endOfLine": "lf",
-  "quoteProps": "as-needed",
-  "jsxSingleQuote": true
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "useTabs": false,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 120,
+    "endOfLine": "lf",
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": true
 }
 ```
 
 ### Étapes :
 
 1. **Créer le fichier** :
-   - Placez le fichier `.prettierrc` à la racine de votre projet.
-   - Ajoutez-y les règles de configuration ci-dessus.
+
+    - Placez le fichier `.prettierrc` à la racine de votre projet.
+    - Ajoutez-y les règles de configuration ci-dessus.
 
 2. **Formats alternatifs** :
    Prettier supporte plusieurs formats pour sa configuration :
-   - `.prettierrc.json` (fichier JSON, comme ci-dessus)
-   - `.prettierrc` (JSON brut)
+
+    - `.prettierrc.json` (fichier JSON, comme ci-dessus)
+    - `.prettierrc` (JSON brut)
 
 3. **Ignorer certains fichiers** :
    Créez un fichier `.prettierignore` pour exclure certains fichiers ou dossiers :
-   ```
-   dist/
-   build/
-   ```
+    ```
+    dist/
+    build/
+    ```
 
 ---
 
@@ -51,18 +53,20 @@ Le fichier `.prettierrc` contient les règles de formatage.
 ### Étapes :
 
 1. **Installer l’extension Prettier** :
-   - Ouvrez VS Code.
-   - Allez dans l’onglet Extensions (Ctrl+Shift+X).
-   - Recherchez et installez **"Prettier - Code formatter"**.
+
+    - Ouvrez VS Code.
+    - Allez dans l’onglet Extensions (Ctrl+Shift+X).
+    - Recherchez et installez **"Prettier - Code formatter"**.
 
 2. **Définir Prettier comme formateur par défaut** :
-   - Ouvrez les paramètres de VS Code (Ctrl+,).
-   - Recherchez `default formatter`.
-   - Sélectionnez **"Prettier - Code formatter"** comme formateur par défaut.
+
+    - Ouvrez les paramètres de VS Code (Ctrl+,).
+    - Recherchez `default formatter`.
+    - Sélectionnez **"Prettier - Code formatter"** comme formateur par défaut.
 
 3. **Activer le formatage automatique** :
-   - Toujours dans les paramètres, recherchez `format on save`.
-   - Cochez l’option **"Editor: Format On Save"** pour un formatage automatique à chaque enregistrement.
+    - Toujours dans les paramètres, recherchez `format on save`.
+    - Cochez l’option **"Editor: Format On Save"** pour un formatage automatique à chaque enregistrement.
 
 ---
 
@@ -70,9 +74,9 @@ Le fichier `.prettierrc` contient les règles de formatage.
 
 ### Dans VS Code :
 
-- **Formater un fichier manuellement** :
-  - Windows : `Shift+Alt+F`
-  - Ou cliquez avec le bouton droit et sélectionnez **"Format Document"**.
+-   **Formater un fichier manuellement** :
+    -   Windows : `Shift+Alt+F`
+    -   Ou cliquez avec le bouton droit et sélectionnez **"Format Document"**.
 
 ---
 
