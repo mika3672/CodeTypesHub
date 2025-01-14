@@ -4,10 +4,7 @@
     let priceCurrency = [];
 
     let { net: net, label: label } = window.productInfo || {};
-    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(
-        `_`,
-        ``
-    );
+    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(`_`, ``);
 
     let options = label.map((el) => currentColor.split(` / `).concat(el));
 
@@ -27,18 +24,11 @@
 
     priceNet = priceNet.length ? priceNet : [net[0]];
     priceNet = priceNet.filter((el) => el);
-    priceCurrency = priceNet.length
-        ? priceNet.map((el) => currency)
-        : [currency];
+    priceCurrency = priceNet.length ? priceNet.map((el) => currency) : [currency];
 
-    priceCurrency = !location.hash.trim().length
-        ? window.prodVariant.map((el) => currency)
-        : priceCurrency;
+    priceCurrency = !location.hash.trim().length ? window.prodVariant.map((el) => currency) : priceCurrency;
 
-    if (
-        prodVariantsColor.length &&
-        prodVariantsColor.length == window.productInfo?.label.length
-    )
+    if (prodVariantsColor.length && prodVariantsColor.length == window.productInfo?.label.length)
         priceCurrency = window.prodVariantsColor.map((el) => currency);
 
     return priceCurrency.join(`<!LIST!>`);

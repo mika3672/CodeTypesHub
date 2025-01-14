@@ -4,15 +4,10 @@
     let { dispo, label } = window.productInfo || {};
 
     // Get the current color from the URL hash
-    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(
-        `_`,
-        ``
-    );
+    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(`_`, ``);
 
     // Generate an array of options by combining the current color with labels
-    let options = label.map((labelItem) =>
-        currentColor.split(` / `).concat(labelItem)
-    );
+    let options = label.map((labelItem) => currentColor.split(` / `).concat(labelItem));
 
     // Iterate through product variants to determine their availability
     window.prodVariant.forEach((variant) => {
@@ -25,9 +20,7 @@
         };
 
         // Check if the variant options match
-        let comparisonResults = comparisonOptions.map((option) =>
-            areArraysEqual(variantOptions, option)
-        );
+        let comparisonResults = comparisonOptions.map((option) => areArraysEqual(variantOptions, option));
 
         // If a match is found, add the availability status of the variant to the list
         if (comparisonResults.includes(true)) {
@@ -36,9 +29,7 @@
     });
 
     // Set availabilityList based on conditions
-    availabilityList = availabilityList.length
-        ? availabilityList
-        : [dispo[0] || window.prodVariant[0]?.available];
+    availabilityList = availabilityList.length ? availabilityList : [dispo[0] || window.prodVariant[0]?.available];
 
     // If there is no hash in the URL, set availabilityList to all variants' availability
     availabilityList = !location.hash.trim().length
@@ -46,13 +37,8 @@
         : availabilityList;
 
     // Check for color-specific variants and adjust the availability list accordingly
-    if (
-        prodVariantsColor.length &&
-        prodVariantsColor.length === window.productInfo?.label.length
-    ) {
-        availabilityList = window.prodVariantsColor.map(
-            (colorVariant) => colorVariant?.available
-        );
+    if (prodVariantsColor.length && prodVariantsColor.length === window.productInfo?.label.length) {
+        availabilityList = window.prodVariantsColor.map((colorVariant) => colorVariant?.available);
     }
 
     // Return the availability
