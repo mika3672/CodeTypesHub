@@ -13,22 +13,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Get the latest commit message
-      - name: Get latest commit message
-        id: get-commit-message
+      # Get the latest commit message and author
+      - name: Get latest commit details
+        id: get-commit-details
         run: |
-          echo "commit_message=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+          commit_message=$(git log -1 --pretty=%B | tr '\n' ' ' | sed 's/["\\]/\\&/g')
+          echo "commit_message=$commit_message" >> $GITHUB_ENV
+          echo "commit_author=$(git log -1 --pretty=%an)" >> $GITHUB_ENV
+          echo "commit_author_email=$(git log -1 --pretty=%ae)" >> $GITHUB_ENV
 
-
+      # Notify Slack
       - name: Notify Slack
         env:
           SLACK_NOTIFY_URL: https://slack-notify.onrender.com
           COMMIT_MESSAGE: ${{ env.commit_message }}
+          COMMIT_AUTHOR: ${{ env.commit_author }}
+          COMMIT_AUTHOR_EMAIL: ${{ env.commit_author_email }}
         run: |
           curl -X POST "$SLACK_NOTIFY_URL/notify" \
           -H "Content-Type: application/json" \
           -d '{
             "channel": "#smartone_dev_comm",
             "username": "Veepee Dev",
-            "commitMessage": "'"$COMMIT_MESSAGE"'"
+            "commitMessage": "'"$COMMIT_MESSAGE"'",
+            "commitAuthor": "'"$COMMIT_AUTHOR"'",
+            "commitAuthorEmail": "'"$COMMIT_AUTHOR_EMAIL"'"
           }'

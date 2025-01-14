@@ -1,0 +1,24 @@
+name: Update Commit Percentage Dashboard SVG
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-svg:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Generate Commit SVG
+        uses: mattnix6/generate-svg-action@v1.0.0
+        with:
+          repository: '.'  #
+          branch: 'commit-dashboard'
+          token: ${{ secrets.GITHUB_TOKEN }}
