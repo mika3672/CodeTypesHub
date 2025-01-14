@@ -12,9 +12,7 @@
         return splitColor.includes(`taglia`) ? splitColor.split(`/`)[0] : splitColor;
     });
 
-    let singleColor = listColor.filter((value, index, self) => {
-        return self.indexOf(value) === index;
-    });
+    let singleColor = listColor.filter((value, index, self) => self.indexOf(value) === index);
 
     let objectColor = {};
 
