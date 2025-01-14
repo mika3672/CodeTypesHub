@@ -50,9 +50,7 @@ function fetchProductLinksSync() {
                 let filteredLinks = filterLinks(Array.from(productLinks));
                 allFilteredLinks = allFilteredLinks.concat(filteredLinks);
 
-                console.log(
-                    `Page ${pageNum}: ${filteredLinks.length} liens filtrés trouvés`
-                );
+                console.log(`Page ${pageNum}: ${filteredLinks.length} liens filtrés trouvés`);
 
                 // Si des liens ont été trouvés, continuer la pagination
                 if (filteredLinks.length > 0) {
@@ -63,10 +61,7 @@ function fetchProductLinksSync() {
                     console.log(`Tous les liens filtrés:`, allFilteredLinks);
                 }
             } else {
-                console.error(
-                    `Erreur lors du chargement de la page:`,
-                    xhr.status
-                );
+                console.error(`Erreur lors du chargement de la page:`, xhr.status);
             }
         };
 

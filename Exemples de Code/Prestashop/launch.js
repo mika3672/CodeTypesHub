@@ -1,8 +1,6 @@
 function getAttributes() {
     let attrs = [];
-    let selectors = document.querySelectorAll(
-        `[class*="-information"] select[name*='group'] option`
-    );
+    let selectors = document.querySelectorAll(`[class*="-information"] select[name*='group'] option`);
     selectors.forEach((el) => {
         let name = el?.parentElement.getAttribute(`name`);
         attrs.push(name);
@@ -19,18 +17,14 @@ function getGroup() {
         let selector = document.querySelectorAll(`[name="${variant}"]`);
         selector.forEach((element) => {
             if (element.tagName.toLowerCase() === `select`) {
-                let selectValues = Array.from(element.options).map(
-                    (option) => option.value
-                );
+                let selectValues = Array.from(element.options).map((option) => option.value);
                 allValues.push({
                     type: `select`,
                     values: selectValues,
                     group: variant,
                 });
             } else if (element.tagName.toLowerCase() === `input`) {
-                let existingGroup = allValues.find(
-                    (item) => item.group === variant && item.type === `input`
-                );
+                let existingGroup = allValues.find((item) => item.group === variant && item.type === `input`);
                 if (existingGroup) {
                     existingGroup.values.push(element.value);
                 } else {
@@ -57,10 +51,7 @@ function sendXHRRequest(url, body) {
 }
 
 function cartesianProduct(arrays) {
-    return arrays.reduce(
-        (acc, curr) => acc.flatMap((a) => curr.map((b) => [...a, b])),
-        [[]]
-    );
+    return arrays.reduce((acc, curr) => acc.flatMap((a) => curr.map((b) => [...a, b])), [[]]);
 }
 
 function parseDOM(text, type = `text/html`) {
@@ -69,9 +60,7 @@ function parseDOM(text, type = `text/html`) {
 }
 
 function getHiddenInputsObject() {
-    let hiddenInputs = document.querySelectorAll(
-        `[class*="-information"] form input[name][type="hidden"]`
-    );
+    let hiddenInputs = document.querySelectorAll(`[class*="-information"] form input[name][type="hidden"]`);
     let inputsObject = {};
     hiddenInputs.forEach((input) => {
         inputsObject[input.name] = input.value;
@@ -105,12 +94,7 @@ function getProducts(allValues) {
         });
 
         let body = params.toString();
-        let uri =
-            url +
-            `?controller=product&token=` +
-            hiddenInputsObj.token +
-            `&` +
-            body;
+        let uri = url + `?controller=product&token=` + hiddenInputsObj.token + `&` + body;
         let response = JSON.parse(sendXHRRequest(uri, paramForms.toString()));
         products.push(response);
     });
@@ -133,9 +117,7 @@ function getPriceNet(products) {
     products.forEach((product) => {
         let productPrice = product?.product_prices;
         productPriceElement = parseDOM(productPrice);
-        productPriceElement = productPriceElement?.querySelector(
-            `[class*="urrent-pric"] [itemprop="price"]`
-        );
+        productPriceElement = productPriceElement?.querySelector(`[class*="urrent-pric"] [itemprop="price"]`);
         productPrice = productPriceElement?.getAttribute(`content`);
         priceNet.push(productPrice);
     });
@@ -148,12 +130,8 @@ function getPriceGross(products) {
     products.forEach((product) => {
         let productPrice = product?.product_prices;
         productPriceElement = parseDOM(productPrice);
-        productPriceElement = productPriceElement?.querySelector(
-            `[class*="roduct-discount"] [class*="regular-price"]`
-        );
-        priceText = productPriceElement?.textContent.replace(/[\.,]/g, (m) =>
-            m === `.` ? `` : `.`
-        );
+        productPriceElement = productPriceElement?.querySelector(`[class*="roduct-discount"] [class*="regular-price"]`);
+        priceText = productPriceElement?.textContent.replace(/[\.,]/g, (m) => (m === `.` ? `` : `.`));
         let priceBrut = parseFloat(priceText) || 0;
         priceGross.push(priceBrut);
     });
@@ -166,9 +144,7 @@ function getPriceCurrency(products) {
     products.forEach((product) => {
         let productPrice = product?.product_prices;
         productPriceElement = parseDOM(productPrice);
-        productPriceElement = productPriceElement?.querySelector(
-            `[class*="-prices"] [itemprop="priceCurrency"]`
-        );
+        productPriceElement = productPriceElement?.querySelector(`[class*="-prices"] [itemprop="priceCurrency"]`);
         productPrice = productPriceElement?.getAttribute(`content`);
         priceCurrency.push(productPrice);
     });
@@ -179,8 +155,7 @@ function getPriceCurrency(products) {
 function getAvailability(products) {
     function isAvailable(element) {
         let selector = element.querySelector(`.add button[class*="to-cart"]`);
-        let isAvailable =
-            selector && !selector?.hasAttribute(`disabled`) ? true : false;
+        let isAvailable = selector && !selector?.hasAttribute(`disabled`) ? true : false;
         return isAvailable;
     }
 
@@ -210,9 +185,7 @@ function getSizeLabels(products) {
         if (sizeSelector) {
             sizes = sizeSelector.textContent;
         } else {
-            let selector = document.querySelector(
-                `[class*="product-information"] [class*="ontenance"]`
-            );
+            let selector = document.querySelector(`[class*="product-information"] [class*="ontenance"]`);
             sizes = selector?.textContent;
         }
         sizes = sizes && sizes.length ? sizes : `TU`;

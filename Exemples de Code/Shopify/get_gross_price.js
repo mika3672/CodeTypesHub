@@ -2,10 +2,7 @@
     let priceBrut = [];
 
     let { brut: brut, label: label } = window.productInfo || {};
-    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(
-        `_`,
-        ``
-    );
+    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(`_`, ``);
 
     let options = label.map((el) => currentColor.split(` / `).concat(el));
 
@@ -24,20 +21,14 @@
     });
 
     priceBrut = priceBrut.length ? priceBrut : [brut[0]];
-    if (!priceBrut.length)
-        priceBrut = window.prodVariant.map((el) => el.compare_at_price / 100);
+    if (!priceBrut.length) priceBrut = window.prodVariant.map((el) => el.compare_at_price / 100);
 
     priceBrut = !location.hash.trim().length
         ? window.prodVariant.map((el) => el.compare_at_price / 100 || 0)
         : priceBrut;
 
-    if (
-        prodVariantsColor.length &&
-        prodVariantsColor.length == window.productInfo?.label.length
-    )
-        priceBrut = window.prodVariantsColor.map(
-            (el) => el.compare_at_price / 100
-        );
+    if (prodVariantsColor.length && prodVariantsColor.length == window.productInfo?.label.length)
+        priceBrut = window.prodVariantsColor.map((el) => el.compare_at_price / 100);
 
     return priceBrut.join(`<!LIST!>`);
 })(`DATA_ATTRIBUTE_INSTANCE_LIVE_SCRAPPER_SPOT`);

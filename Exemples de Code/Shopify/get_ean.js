@@ -2,10 +2,7 @@
     let barcode = [];
 
     let { barcode: code, label: label } = window.productInfo || {};
-    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(
-        `_`,
-        ``
-    );
+    let currentColor = decodeURIComponent(location.hash.slice(1)).replace(`_`, ``);
 
     let options = label.map((el) => currentColor.split(` / `).concat(el));
 
@@ -25,10 +22,7 @@
 
     barcode = barcode.length ? barcode : [code[0]];
     if (!barcode.length) barcode = window.prodVariant.map((el) => el.barcode);
-    if (
-        prodVariantsColor.length &&
-        prodVariantsColor.length == window.productInfo?.label.length
-    )
+    if (prodVariantsColor.length && prodVariantsColor.length == window.productInfo?.label.length)
         barcode = window.prodVariantsColor.map((el) => el.barcode);
 
     barcode = barcode.map((el) => el || ``);

@@ -1,17 +1,5 @@
 class Product {
-    constructor(
-        sku,
-        description,
-        name,
-        net,
-        brut,
-        currency,
-        label,
-        dispo,
-        pictures,
-        barcode,
-        variants
-    ) {
+    constructor(sku, description, name, net, brut, currency, label, dispo, pictures, barcode, variants) {
         this.sku = sku;
         this.descriptionHtml = description?.body;
         this.description = description?.body.textContent;
@@ -39,9 +27,7 @@ class Product {
     }
 
     static getHiddenInputsObject() {
-        let hiddenInputs = document.querySelectorAll(
-            `form input[name][type="hidden"]`
-        );
+        let hiddenInputs = document.querySelectorAll(`form input[name][type="hidden"]`);
         let inputsObject = {};
         hiddenInputs.forEach((input) => {
             inputsObject[input.name] = input.value;
@@ -50,15 +36,10 @@ class Product {
     }
 
     static getPictures(resp) {
-        let color = decodeURIComponent(location.hash.substring(1)).replace(
-            `_`,
-            ``
-        );
+        let color = decodeURIComponent(location.hash.substring(1)).replace(`_`, ``);
         let { variants, media: medias } = resp;
         let featuredImageAlts = variants?.map((el) => el?.featured_image?.alt);
-        let pictures = medias
-            ?.filter(({ alt }) => featuredImageAlts.includes(alt))
-            .map(({ src }) => src);
+        let pictures = medias?.filter(({ alt }) => featuredImageAlts.includes(alt)).map(({ src }) => src);
         return pictures?.length ? pictures : medias?.map(({ src }) => src);
     }
 
@@ -87,8 +68,7 @@ class Product {
     }
 
     static compareArrays(arr1, arr2) {
-        const isSubset = (smaller, larger) =>
-            smaller?.every((value) => larger?.includes(value));
+        const isSubset = (smaller, larger) => smaller?.every((value) => larger?.includes(value));
 
         if (isSubset(arr1, arr2) && isSubset(arr2, arr1)) {
             return true;
@@ -118,36 +98,19 @@ window.prodCurrency = getCurrency;
 
 if (getLoc && getCurrency) {
     let resp = Product.sendXHRRequest(getLoc + `.js`);
-    let descriptionHtml = Product.parseDOM(
-        `<html><body>${resp.description}<body></html>`
-    );
+    let descriptionHtml = Product.parseDOM(`<html><body>${resp.description}<body></html>`);
 
-    let optionKeywords = [
-        `couleur`,
-        `color`,
-        `titre`,
-        `title`,
-        `titolo`,
-        `model`,
-        `modèle`,
-    ];
+    let optionKeywords = [`couleur`, `color`, `titre`, `title`, `titolo`, `model`, `modèle`];
 
     let options = resp.options.filter(
-        (el) =>
-            !optionKeywords.some((keyword) =>
-                el.name.toLowerCase().includes(keyword)
-            )
+        (el) => !optionKeywords.some((keyword) => el.name.toLowerCase().includes(keyword))
     );
 
     let colorList = resp.options.filter((el) =>
-        optionKeywords.some((keyword) =>
-            el.name.toLowerCase().includes(keyword)
-        )
+        optionKeywords.some((keyword) => el.name.toLowerCase().includes(keyword))
     );
 
-    let colorCombination = Product.getCombinations(colorList).map((el) =>
-        encodeURI(el.join(` / `))
-    );
+    let colorCombination = Product.getCombinations(colorList).map((el) => encodeURI(el.join(` / `)));
     let colorLinks = colorCombination.map((el) => `${currentUrl}#${el}`);
     window.prodColorLinks = colorLinks;
     window.prodVariant = resp.variants;
@@ -155,9 +118,7 @@ if (getLoc && getCurrency) {
     let combinations = Product.getCombinations(colorList);
 
     let colorDecliLinks = combinations.map((c) =>
-        window.prodVariant.find((variant) =>
-            Product.compareArrays(variant.options, c)
-        )
+        window.prodVariant.find((variant) => Product.compareArrays(variant.options, c))
     );
 
     let prod = [];
@@ -168,9 +129,7 @@ if (getLoc && getCurrency) {
                 variant[`colorOptions`] = combination;
 
                 let getLoc = new URL(location.href);
-                let url = `${getLoc.origin}${getLoc.pathname}?variant=${
-                    variant.id
-                }#${encodeURI(variant.color)}`;
+                let url = `${getLoc.origin}${getLoc.pathname}?variant=${variant.id}#${encodeURI(variant.color)}`;
                 variant[`color_url`] = url;
                 prod.push(variant);
             }
@@ -189,13 +148,9 @@ if (getLoc && getCurrency) {
     window.prodVariantsColor = variantsColor;
 
     colorList = colorList.flatMap((el) => el.values);
-    resp.variants = resp.variants.filter((el) =>
-        el.options.includes(colorList[1])
-    );
+    resp.variants = resp.variants.filter((el) => el.options.includes(colorList[1]));
 
-    window.prodColorVariant = colorList.map((color) =>
-        window.prodVariant.find((el) => el.options.includes(color))
-    );
+    window.prodColorVariant = colorList.map((color) => window.prodVariant.find((el) => el.options.includes(color)));
     window.prodColorVariant = window.prodColorVariant.map((variant, index) =>
         Product.addOrReplaceVariant(colorLinks[index], variant.id)
     );
@@ -210,23 +165,15 @@ if (getLoc && getCurrency) {
     );
 
     let label = options.length ? options[0].values : [];
-    label = label.filter((lab) =>
-        window.prodVariant.some((el) => el.title.includes(lab))
-    );
+    label = label.filter((lab) => window.prodVariant.some((el) => el.title.includes(lab)));
 
-    label = label.filter((el) =>
-        window.prodVariant.find(
-            (v) => v.title.includes(el) && v.title.includes(color)
-        )
-    );
+    label = label.filter((el) => window.prodVariant.find((v) => v.title.includes(el) && v.title.includes(color)));
 
     let dispo = variantsColor.map((el) => el.available);
     let pictures = Product.getPictures(resp);
 
     let barcode = variantsColor.map((el) => el.barcode);
-    let brut = variantsColor.map((el) =>
-        el.compare_at_price ? el.compare_at_price / 100 : el.price / 100
-    );
+    let brut = variantsColor.map((el) => (el.compare_at_price ? el.compare_at_price / 100 : el.price / 100));
     let net = variantsColor.map((el) => el.price / 100);
     let currency = net.map((el) => getCurrency);
     currency = currency && !currency.length ? [getCurrency] : getCurrency;
