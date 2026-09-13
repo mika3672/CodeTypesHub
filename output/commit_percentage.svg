@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="290">
+    <style>
+      .title { font: bold 18px sans-serif; fill: #333; }
+      .subtitle { font: bold 14px sans-serif; fill: #666; }
+      .text { font: 14px sans-serif; fill: #555; }
+      .bar { fill: #4caf50; }
+      .bg-bar { fill: #e0e0e0; }
+    </style>
+    <text x="20" y="30" class="title">Commit Percentage Dashboard</text>
+    
+        <rect x="20" y="80" width="400" height="20" class="bg-bar"></rect>
+        <rect x="20" y="80" width="58.06451612903226" height="20" class="bar"></rect>
+        <text x="430" y="95" class="text">14.52%</text>
+        <text x="25" y="95" class="text">Suave10</text>
+        
+        <rect x="20" y="110" width="400" height="20" class="bg-bar"></rect>
+        <rect x="20" y="110" width="25.806451612903224" height="20" class="bar"></rect>
+        <text x="430" y="125" class="text">6.45%</text>
+        <text x="25" y="125" class="text">Rojo Irina</text>
+        
+        <rect x="20" y="140" width="400" height="20" class="bg-bar"></rect>
+        <rect x="20" y="140" width="251.61290322580646" height="20" class="bar"></rect>
+        <text x="430" y="155" class="text">62.90%</text>
+        <text x="25" y="155" class="text">Nirina</text>
+        
+        <rect x="20" y="170" width="400" height="20" class="bg-bar"></rect>
+        <rect x="20" y="170" width="19.35483870967742" height="20" class="bar"></rect>
+        <text x="430" y="185" class="text">4.84%</text>
+        <text x="25" y="185" class="text">FlorenceMam</text>
+        
+        <rect x="20" y="200" width="400" height="20" class="bg-bar"></rect>
+        <rect x="20" y="200" width="12.903225806451612" height="20" class="bar"></rect>
+        <text x="430" y="215" class="text">3.23%</text>
+        <text x="25" y="215" class="text">lantomalalaWork</text>
+        
+        <rect x="20" y="230" width="400" height="20" class="bg-bar"></rect>
+        <rect x="20" y="230" width="12.903225806451612" height="20" class="bar"></rect>
+        <text x="430" y="245" class="text">3.23%</text>
+        <text x="25" y="245" class="text">Onjatiana-valisoa</text>
+        
+        <rect x="20" y="260" width="400" height="20" class="bg-bar"></rect>
+        <rect x="20" y="260" width="19.35483870967742" height="20" class="bar"></rect>
+        <text x="430" y="275" class="text">4.84%</text>
+        <text x="25" y="275" class="text">nyhery</text>
+        </svg>
